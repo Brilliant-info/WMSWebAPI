@@ -21,6 +21,9 @@ builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
+// Listen on all IPs
+app.Urls.Add("http://0.0.0.0:5000");
+
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
