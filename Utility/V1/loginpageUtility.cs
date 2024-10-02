@@ -63,7 +63,54 @@ namespace WMSWebAPI.Utility.V1
             }
             return isLocalDev;
         }
+
         public async Task<JsonElement> Getlogin(GetloginRequest req, HttpContext httpContext1)
+        {
+            //    if (httpContext1 == null)
+            //    {
+            //        throw new ArgumentNullException(nameof(httpContext1));
+            //    }
+
+            string EncrypPassword = "|@|" + encryptstring(req.Password);
+            param = new SqlParameter[]
+                    {
+                        new SqlParameter("@UserName", req.UserName),
+                        new SqlParameter("@Password", req.Password),
+                        new SqlParameter("@EncrypPassword", EncrypPassword)
+
+                    };
+            return await obj.ConvertDataSetToJObject(obj.Return_DataSet("Loginpage", param));
+
+            //string isLocalDev = isLocalDevelopement(httpContext);
+            //if ((isLocalDev == "yes"))
+            //{
+            //    string EncrypPassword = "|@|" + encryptstring(req.Password);
+            //    param = new SqlParameter[]
+            //            {
+            //            new SqlParameter("@UserName", req.UserName),
+            //            new SqlParameter("@Password", req.Password),
+            //            new SqlParameter("@EncrypPassword", EncrypPassword)
+
+            //            };
+            //    return await obj.ConvertDataSetToJObject(obj.Return_DataSet("Loginpage", param));
+            //}
+            //else
+            //{
+            //    TokenAuthUtility tokenObj = new TokenAuthUtility();
+            //    string GetToken = tokenObj.GenerateTokenCode();
+            //    string EncrypPassword = "|@|" + encryptstring(req.Password);
+            //    param = new SqlParameter[]
+            //            {
+            //            new SqlParameter("@UserName", req.UserName),
+            //            new SqlParameter("@Password", req.Password),
+            //            new SqlParameter("@EncrypPassword", EncrypPassword),
+            //            new SqlParameter("@Token", GetToken),
+            //            };
+            //    return await obj.ConvertDataSetToJObject(obj.Return_DataSet("LoginWithToken", param));
+            //}
+
+        }
+        public async Task<JsonElement> Getlogin1(GetloginRequest req, HttpContext httpContext1)
         {
         //    if (httpContext1 == null)
         //    {
